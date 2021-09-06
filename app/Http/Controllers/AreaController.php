@@ -75,6 +75,10 @@ class AreaController extends BaseController
         $data = DB::table('cities')
             ->where('name', $cityname)
             ->first();
+        if (!$data){
+            // 如果找不到，就默认返回北京的位置
+            return $this->create(['label' => '北京', 'value' => 'AREA|88cff55c-aaa4-e2e0'], '请求成功');
+        }
         $res = [
             'label' => $data->name,
             'value' => $data->code
